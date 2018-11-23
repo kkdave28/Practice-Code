@@ -151,6 +151,7 @@ void print_valid_ip_addr(std::string s, std::string output="", int depth = 0)
                 }
                 if(std::stoi(s.substr(i,2))>=10)
                     print_valid_ip_addr(s.substr(i+2),output+s.substr(i,2)+".", depth+1);
+                
             }
             if(s.length()-i>=2)
             {
