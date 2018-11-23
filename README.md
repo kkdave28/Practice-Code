@@ -1,1 +1,1 @@
-My practice code for interviews and tuff
+My practice code for interviews and stuff
