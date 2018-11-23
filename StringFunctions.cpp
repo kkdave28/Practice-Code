@@ -137,7 +137,7 @@ void print_valid_ip_addr(std::string s, std::string output="", int depth = 0)
 {
     if(depth == 4)
     {
-        std::cout<<output<<std::endl;
+        std::cout<<output.substr(0, output.length()-1)<<std::endl;
     }
     else
     {
