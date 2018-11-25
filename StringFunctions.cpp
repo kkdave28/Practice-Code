@@ -133,11 +133,11 @@ void find_common_letters(std::string x, std::string y)
     }
     
 }
-void print_valid_ip_addr(std::string s, std::string output="", int depth = 0)
+void print_valid_ip_addr(std::string s, std::set<std::string> & ip_set ,std::string output="", int depth = 0)
 {
     if(depth == 4)
     {
-        std::cout<<output.substr(0, output.length()-1)<<std::endl;
+        ip_set.insert(output.substr(0, output.length()-1));
     }
     else
     {
@@ -147,23 +147,23 @@ void print_valid_ip_addr(std::string s, std::string output="", int depth = 0)
             {
                 if(std::stoi(s.substr(i,3))<= 255)
                 {
-                    print_valid_ip_addr(s.substr(i+3),output+s.substr(i,3)+".", depth+1);
+                    print_valid_ip_addr(s.substr(i+3),ip_set,output+s.substr(i,3)+".", depth+1);
                 }
                 if(std::stoi(s.substr(i,2))>=10)
-                    print_valid_ip_addr(s.substr(i+2),output+s.substr(i,2)+".", depth+1);
+                    print_valid_ip_addr(s.substr(i+2),ip_set,output+s.substr(i,2)+".", depth+1);
                 
             }
             if(s.length()-i>=2)
             {
                 if(std::stoi(s.substr(i,2))>= 10)
                 {
-                    print_valid_ip_addr(s.substr(i+2),output+s.substr(i,2)+".", depth+1);
+                    print_valid_ip_addr(s.substr(i+2),ip_set,output+s.substr(i,2)+".", depth+1);
                 }
-                print_valid_ip_addr(s.substr(i+1),output+s.substr(i,1)+".", depth+1);
+                print_valid_ip_addr(s.substr(i+1),ip_set,output+s.substr(i,1)+".", depth+1);
             }
             else if (s.length()-i >=1)
             {
-                print_valid_ip_addr(s.substr(i+1),output+s.substr(i,1)+".", depth+1);
+                print_valid_ip_addr(s.substr(i+1),ip_set,output+s.substr(i,1)+".", depth+1);
             }
         }
     }
@@ -181,6 +181,9 @@ int main(int argc, char const *argv[])
     // print_all_combinations(x,freq_map, "", ret);
     // for(auto E: ret)
     //     std::cout<<E<<std::endl;
-    print_valid_ip_addr(argv[1]);
+    std::set<std::string> ip_set;
+    print_valid_ip_addr(argv[1], ip_set);
+    for (auto E: ip_set)
+        std::cout<<E<<std::endl;
     return 0;
 }
